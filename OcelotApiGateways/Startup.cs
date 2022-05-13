@@ -39,7 +39,8 @@ namespace OcelotApiGateways
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            services.AddOcelot().AddEureka().AddCacheManager(settings => settings.WithDictionaryHandle());
+            //services.AddOcelot().AddEureka().AddCacheManager(settings => settings.WithDictionaryHandle());
+            services.AddOcelot().AddCacheManager(settings => settings.WithDictionaryHandle());
         }
         public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
