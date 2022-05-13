@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: OcelotApiGateways/Dockerfile
     ports:
-     - "8111:80"
-     - "8222:443"
+     - "1234:80"
+     - "4321:443"
     environment:
      - ASPNETCORE_ENVIRONMENT=Development
      - ASPNETCORE_URLS=https://+:443;http://+:80
