@@ -1,0 +1,65 @@
+version: '3.4'
+
+services:
+  ocelotapigateways:
+    image: ${DOCKER_REGISTRY-}ocelotapigateways
+    build:
+      context: .
+      dockerfile: OcelotApiGateways/Dockerfile
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=https://+:443;http://+:80
+     - ASPNETCORE_Kestrel__Certificates__Default__Password=ASPNETCORE_ENVIRONMENT
+     - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+     - "8888:80"
+     - "8443:443"
+    volumes:
+     - ~/.aspnet/https:/https:ro
+  holacommon.api:
+    image: ${DOCKER_REGISTRY-}holacommonapi
+    build:
+      context: .
+      dockerfile: HolaCommon.API/Dockerfile
+    ports:
+     - "8011:80"
+     - "8111:443"
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=https://+:443;http://+:80
+     - ASPNETCORE_Kestrel__Certificates__Default__Password=ASPNETCORE_ENVIRONMENT
+     - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+     - ~/.aspnet/https:/https:ro
+
+  common2:
+    image: ${DOCKER_REGISTRY-}holacommonapi
+    build:
+      context: .
+      dockerfile: HolaCommon.API/Dockerfile
+    ports:
+     - "8022:80"
+     - "8222:443"
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=https://+:443;http://+:80
+     - ASPNETCORE_Kestrel__Certificates__Default__Password=ASPNETCORE_ENVIRONMENT
+     - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+     - ~/.aspnet/https:/https:ro
+
+  dommon2:
+    image: ${DOCKER_REGISTRY-}holacommonapi
+    build:
+      context: .
+      dockerfile: HolaCommon.API/Dockerfile
+    ports:
+     - "8033:80"
+     - "8333:443"
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=https://+:443;http://+:80
+     - ASPNETCORE_Kestrel__Certificates__Default__Password=ASPNETCORE_ENVIRONMENT
+     - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+     - ~/.aspnet/https:/https:ro
